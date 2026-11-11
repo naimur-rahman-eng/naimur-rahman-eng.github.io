@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naimur Rahman | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts for clean typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-brand">Naimur Rahman</div>
+    <div class="nav-links">
+      <a href="#about" class="active">ABOUT</a>
+      <a href="#publications">PUBLICATIONS</a>
+      <a href="#resume">RESUME</a>
+      <a href="#projects">PROJECTS</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero / Header Section -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <span class="sub-heading">RESEARCH &bull; ROBOTICS AND MECHATRONICS ENGINEERING, UNIVERSITY OF DHAKA</span>
+        <h1 class="main-title">Naimur Rahman</h1>
+        
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Applying for PhD positions - Fall 2027</span>
+        </div>
+
+        <div class="social-links">
+          <a href="mailto:your.email@example.com"><i class="fa-regular fa-envelope"></i> Email</a>
+          <a href="#"><i class="fa-solid fa-graduation-cap"></i> Scholar</a>
+          <a href="https://github.com"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        </div>
+
+        <p class="hero-lead">
+          I work on <span class="highlight">embodied agents</span> that learn <span class="highlight">long-horizon skills</span> from <span class="highlight">offline data</span> and world models.
+        </p>
+
+        <div class="bio-columns">
+          <p>
+            I am an undergraduate student in Robotics and Mechatronics Engineering at the University of Dhaka. My research focuses on artificial intelligence applications in robotics, specifically investigating world models and latent space video dynamics predictors for robotic manipulation tasks.
+          </p>
+          <p>
+            I develop deep learning architectures using PyTorch, C++, and Python, alongside ROS2 middleware setups. My goal is to bridge offline reinforcement learning with grounded temporal representations to enable robots to operate reliably in complex environments.
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-photo-container">
+        <!-- Replace profile.jpg with your profile image path -->
+        <img src="profile.jpg" alt="Naimur Rahman" class="profile-photo" />
+      </div>
+    </header>
+
+    <hr class="divider" />
+
+    <!-- Research Section -->
+    <section id="research" class="grid-section">
+      <div class="section-label">
+        <h2>RESEARCH</h2>
+      </div>
+      <div class="section-content">
+        <p class="section-lead-text">
+          I want agents that can carry out long, multi-step tasks in the real world. That takes value estimates that stay accurate over long horizons, representations that capture dynamic structure, and systems that learn effectively from offline interactions.
+        </p>
+
+        <div class="cards-grid">
+          <div class="card">
+            <h3>Reinforcement Learning</h3>
+            <p>Learning complex skills from offline datasets. Studying value estimation stability over long horizons under stochastic dynamics.</p>
+          </div>
+          <div class="card">
+            <h3>Embodied AI</h3>
+            <p>Integrating neural perception and dynamics models for robotic controllers, focused on spatial grounding and manipulation.</p>
+          </div>
+          <div class="card">
+            <h3>World Models & Dynamics</h3>
+            <p>Leveraging latent space video predictors to allow agents to simulate actions and anticipate complex environment transitions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- PhD Section -->
+    <section id="phd" class="grid-section">
+      <div class="section-label">
+        <h2>PhD</h2>
+        <span class="label-sub">Fall 2027</span>
+      </div>
+      <div class="section-content">
+        <h2 class="section-heading">Looking for a PhD position</h2>
+        <p>
+          I am applying to PhD programs starting in <strong>Fall 2027</strong>. I want to keep building embodied agents that learn long-horizon skills, world models, and robust control strategies for real-world robotics.
+        </p>
+        <p>
+          If you work on robot learning, embodied AI, or reinforcement learning and think we'd be a good fit, I'd love to hear from you.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="mailto:your.email@example.com" class="btn btn-dark">Email me</a>
+          <a href="#" class="btn btn-outline">Download CV</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
