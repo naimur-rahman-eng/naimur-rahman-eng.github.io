@@ -7,10 +7,10 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  overflow-x: clip; /* stops sideways page scroll without breaking the sticky navbar */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #1a1a1a;
   background-color: #ffffff;
@@ -24,33 +24,31 @@ body {
   padding: 20px 24px 80px 24px;
 }
 
-/* Navbar (sticky so it stays visible while scrolling) */
+/* Navbar (sticky). Full-width white bar; content lines up with the 1040px column.
+   No element is wider than the screen, so the page can never scroll sideways. */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 20px 24px;
+  width: 100%;
+  padding: 20px max(24px, calc((100% - 1040px) / 2 + 24px));
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   background-color: #ffffff;
-  border-bottom: 1px solid #1a1a1a;
 }
 
-/* White strip behind the navbar across the full screen width,
-   so page content never shows through beside it while scrolling */
-.navbar::before {
+/* Bottom line, limited to the content width */
+.navbar::after {
   content: "";
   position: absolute;
-  top: 0;
   bottom: 0;
-  left: -100vw;
-  right: -100vw;
-  background: #ffffff;
-  z-index: -1;
+  left: 50%;
+  width: min(100%, 1040px);
+  height: 1px;
+  background: #1a1a1a;
+  transform: translateX(-50%);
 }
 
 .nav-brand {
@@ -103,7 +101,7 @@ section[id] {
 /* Hero Section */
 .hero-section {
   display: grid;
-  grid-template-columns: 1fr 260px;
+  grid-template-columns: minmax(0, 1fr) 260px;
   gap: 40px;
   padding-top: 40px;
 }
@@ -201,7 +199,7 @@ section[id] {
 /* Grid Sections */
 .grid-section {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 160px minmax(0, 1fr);
   gap: 32px;
 }
 
@@ -283,6 +281,28 @@ section[id] {
   margin-top: 3px;
 }
 
+.achievement-item > div,
+.certificate-item > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.achievement-item .achievement-org {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.certificate-item a {
+  color: #0284c7;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.certificate-item a:hover {
+  text-decoration: underline;
+}
+
 .achievement-item h3,
 .certificate-item h3 {
   font-size: 1rem;
@@ -352,7 +372,7 @@ section[id] {
   }
 
   .hero-section {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
     padding-top: 24px;
   }
@@ -364,16 +384,16 @@ section[id] {
   }
 
   .grid-section {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 
   .cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .bio-columns {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .main-title {
