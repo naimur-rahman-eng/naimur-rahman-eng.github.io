@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #1a1a1a;
@@ -19,37 +23,60 @@ body {
   padding: 20px 24px 80px 24px;
 }
 
-/* Navbar */
+/* Navbar (sticky so it stays visible while scrolling) */
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   max-width: 1040px;
   margin: 0 auto;
   padding: 20px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  background-color: #ffffff;
   border-bottom: 1px solid #1a1a1a;
 }
 
 .nav-brand {
   font-weight: 700;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+/* Default: black text. Active (clicked / current section): red text */
 .nav-links a {
   text-decoration: none;
-  color: #666666;
+  color: #000000;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   margin-left: 20px;
-  transition: color 0.2s ease;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+  color: #b91c1c;
+}
+
 .nav-links a.active {
-  color: #000000;
-  border-bottom: 2px solid #000000;
-  padding-bottom: 4px;
+  color: #b91c1c;
+  border-bottom-color: #b91c1c;
+}
+
+/* Make sections stop below the sticky navbar when jumped to */
+#about,
+section[id] {
+  scroll-margin-top: 90px;
 }
 
 /* Hero Section */
@@ -184,6 +211,11 @@ body {
   margin-bottom: 16px;
 }
 
+.empty-note {
+  font-size: 0.9rem;
+  color: #888888;
+}
+
 /* Cards Grid */
 .cards-grid {
   display: grid;
@@ -201,6 +233,45 @@ body {
   font-size: 0.82rem;
   color: #666666;
   line-height: 1.5;
+}
+
+/* Achievements & Certificates */
+.achievement-list,
+.certificate-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.certificate-list:empty {
+  display: none;
+}
+
+.achievement-item,
+.certificate-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.achievement-item i,
+.certificate-item i {
+  color: #b91c1c;
+  font-size: 1.3rem;
+  margin-top: 3px;
+}
+
+.achievement-item h3,
+.certificate-item h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.achievement-item p,
+.certificate-item p {
+  font-size: 0.85rem;
+  color: #666666;
 }
 
 /* Buttons */
@@ -242,14 +313,46 @@ body {
 
 /* Responsive Adjustments */
 @media (max-width: 850px) {
+  /* Navbar: brand on top, links scroll sideways in one row */
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 24px;
+  }
+
+  .nav-links {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    margin-left: 0;
+    margin-right: 20px;
+  }
+
+  #about,
+  section[id] {
+    scroll-margin-top: 110px;
+  }
+
   .hero-section {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 24px;
   }
-  
+
+  /* Photo comes first (above the text) on mobile */
   .profile-photo-container {
+    order: -1;
     max-width: 260px;
   }
-  
+
   .grid-section {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -262,7 +365,7 @@ body {
   .bio-columns {
     grid-template-columns: 1fr;
   }
-  
+
   .main-title {
     font-size: 2.5rem;
   }

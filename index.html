@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Google Fonts for clean typography -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,27 +22,29 @@
       <a href="#publications">PUBLICATIONS</a>
       <a href="#resume">RESUME</a>
       <a href="#projects">PROJECTS</a>
+      <a href="#achievements">ACHIEVEMENTS</a>
+      <a href="#certificates">CERTIFICATES</a>
     </div>
   </nav>
 
   <main class="container">
 
-    <!-- Hero / Header Section -->
-    <header class="hero-section">
+    <!-- Hero / About Section -->
+    <header id="about" class="hero-section">
       <div class="hero-content">
         <span class="sub-heading">RESEARCH &bull; ROBOTICS AND MECHATRONICS ENGINEERING, UNIVERSITY OF DHAKA</span>
         <h1 class="main-title">Naimur Rahman</h1>
-        
+
         <div class="status-badge">
           <span class="status-dot"></span>
           <span>Applying for PhD positions - Fall 2027</span>
         </div>
 
         <div class="social-links">
-          <a href="mailto:your.email@example.com"><i class="fa-regular fa-envelope"></i> Email</a>
+          <a href="mailto:naimur794@gmail.com"><i class="fa-regular fa-envelope"></i> Email</a>
           <a href="#"><i class="fa-solid fa-graduation-cap"></i> Scholar</a>
           <a href="https://github.com"><i class="fa-brands fa-github"></i> GitHub</a>
-          <a href="https://linkedin.com"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a href="https://www.linkedin.com/in/naimur-rahman-6a9bba42b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         </div>
 
         <p class="hero-lead">
@@ -87,10 +89,93 @@
             <p>Integrating neural perception and dynamics models for robotic controllers, focused on spatial grounding and manipulation.</p>
           </div>
           <div class="card">
-            <h3>World Models & Dynamics</h3>
+            <h3>World Models &amp; Dynamics</h3>
             <p>Leveraging latent space video predictors to allow agents to simulate actions and anticipate complex environment transitions.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Publications Section -->
+    <section id="publications" class="grid-section">
+      <div class="section-label">
+        <h2>PUBLICATIONS</h2>
+      </div>
+      <div class="section-content">
+        <p class="empty-note">Publications will be added here soon.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Resume Section -->
+    <section id="resume" class="grid-section">
+      <div class="section-label">
+        <h2>RESUME</h2>
+      </div>
+      <div class="section-content">
+        <p class="empty-note">Download my CV to see my full academic background.</p>
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-outline">Download CV</a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Projects Section -->
+    <section id="projects" class="grid-section">
+      <div class="section-label">
+        <h2>PROJECTS</h2>
+      </div>
+      <div class="section-content">
+        <p class="empty-note">Projects will be added here soon.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="grid-section">
+      <div class="section-label">
+        <h2>ACHIEVEMENTS</h2>
+      </div>
+      <div class="section-content">
+        <ul class="achievement-list">
+          <li class="achievement-item">
+            <i class="fa-solid fa-award"></i>
+            <div>
+              <h3>Shahidullah Hall Excellent Award</h3>
+              <p>University of Dhaka</p>
+            </div>
+          </li>
+          <!-- Add more achievements by copying the <li> block above -->
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Certificates Section (empty for now) -->
+    <section id="certificates" class="grid-section">
+      <div class="section-label">
+        <h2>CERTIFICATES</h2>
+      </div>
+      <div class="section-content">
+        <p class="empty-note">Certificates will be added here soon.</p>
+        <ul class="certificate-list">
+          <!-- When you have a certificate, copy this block and remove the comment:
+          <li class="certificate-item">
+            <i class="fa-solid fa-certificate"></i>
+            <div>
+              <h3>Certificate Name</h3>
+              <p>Issuing organization &bull; Year</p>
+            </div>
+          </li>
+          -->
+        </ul>
       </div>
     </section>
 
@@ -119,5 +204,42 @@
     </section>
 
   </main>
+
+  <!-- Highlights the nav link of the section you are viewing / clicked -->
+  <script>
+    (function () {
+      var links = document.querySelectorAll('.nav-links a');
+      var map = {};
+      links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+
+      function setActive(id) {
+        links.forEach(function (a) { a.classList.remove('active'); });
+        if (map[id]) {
+          map[id].classList.add('active');
+          // keep the active link visible in the scrollable mobile menu
+          map[id].scrollIntoView({ block: 'nearest', inline: 'center' });
+        }
+      }
+
+      links.forEach(function (a) {
+        a.addEventListener('click', function () {
+          setActive(a.getAttribute('href').slice(1));
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+
+        Object.keys(map).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) observer.observe(el);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
