@@ -208,37 +208,79 @@
   <!-- Highlights the nav link of the section you are viewing / clicked -->
   <script>
     (function () {
-      var links = document.querySelectorAll('.nav-links a');
-      var map = {};
-      links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+      var nav = document.querySelector('.navbar');
+      var menu = document.querySelector('.nav-links');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+      var sections = Array.prototype.slice.call(document.querySelectorAll('#about, main section[id]'));
+      var current = null;
+      var locked = false;      // true while a clicked link is smooth-scrolling
+      var lockTimer = null;
+      var ticking = false;
 
+      // Keep the sticky navbar height in sync so sections stop right below it
+      function setNavHeight() {
+        document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+      }
+
+      // Highlight a link and slide the mobile menu sideways (never scrolls the page itself)
       function setActive(id) {
-        links.forEach(function (a) { a.classList.remove('active'); });
-        if (map[id]) {
-          map[id].classList.add('active');
-          // keep the active link visible in the scrollable mobile menu
-          map[id].scrollIntoView({ block: 'nearest', inline: 'center' });
+        if (id === current) return;
+        current = id;
+        links.forEach(function (a) {
+          var on = a.getAttribute('href') === '#' + id;
+          a.classList.toggle('active', on);
+          if (on) {
+            var target = a.offsetLeft - (menu.clientWidth - a.offsetWidth) / 2;
+            menu.scrollTo({ left: target, behavior: 'smooth' });
+          }
+        });
+      }
+
+      // Which nav link owns the section currently under the navbar?
+      // Sections without their own link (Research, PhD) belong to the previous link.
+      function update() {
+        ticking = false;
+        if (locked) return;
+        var line = nav.offsetHeight + 40;
+        var owner = 'about';
+        var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+        if (atBottom) {
+          owner = links[links.length - 1].getAttribute('href').slice(1);
+        } else {
+          sections.forEach(function (s) {
+            if (s.getBoundingClientRect().top <= line) {
+              if (links.some(function (a) { return a.getAttribute('href') === '#' + s.id; })) owner = s.id;
+            }
+          });
         }
+        setActive(owner);
+      }
+
+      function onScroll() {
+        if (locked) {
+          // unlock once the smooth scroll has stopped moving
+          clearTimeout(lockTimer);
+          lockTimer = setTimeout(function () { locked = false; update(); }, 120);
+          return;
+        }
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
       }
 
       links.forEach(function (a) {
         a.addEventListener('click', function () {
+          locked = true;
           setActive(a.getAttribute('href').slice(1));
+          clearTimeout(lockTimer);
+          lockTimer = setTimeout(function () { locked = false; update(); }, 900);
         });
       });
 
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) setActive(entry.target.id);
-          });
-        }, { rootMargin: '-30% 0px -60% 0px' });
-
-        Object.keys(map).forEach(function (id) {
-          var el = document.getElementById(id);
-          if (el) observer.observe(el);
-        });
-      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', function () { setNavHeight(); update(); });
+      window.addEventListener('load', function () { setNavHeight(); update(); });
+      setNavHeight();
+      update();
     })();
   </script>
 </body>
