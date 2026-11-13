@@ -21,7 +21,7 @@ body {
 .container {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 20px 24px 80px 24px;
+  padding: 20px 24px 48px 24px;
 }
 
 /* Navbar (sticky). Full-width white bar; content lines up with the 1040px column.
@@ -350,6 +350,21 @@ section[id] {
 
 .btn-outline:hover {
   background-color: #f4f4f5;
+}
+
+/* Footer */
+.site-footer {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 20px 24px 32px 24px;
+  border-top: 1px solid #1a1a1a;
+  text-align: center;
+}
+
+.site-footer p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b91c1c;
 }
 
 /* Responsive Adjustments */
